@@ -1,21 +1,30 @@
 function lists(team){
-	alert(team);
-	var data = { 
-			team : team 
-			
-	}
-	
 	$.ajax({
 		type : "post", 
 		url : "/mlb/team?cmd=playerProc", 
-		data : JSON.stringify(data),
-		contentType : "application/json; charset-utf-8", 
+		data : "team="+team,
+		contentType : "application/x-www-form-urlencoded; charset-utf-8", 
 		dataType : "json"
 		
-	}).done({
+	}).done(function(result){
+		  var i = 1;
+		  $("#players").empty();
+		  $("#playerinfo").empty();
+		  for(var name of result){
+			     var trItem = "<tr>";
+			         trItem += "<td>"+ i++ + "</td>";
+			    	 trItem +=` <td><a style="cursor:pointer" onclick="playerinfo('${name}')">${name}</a></td>`;
+			         trItem +="</tr>";
+			   	  $("#players").append(trItem);
+			   	 
+			   	  trItem="";
+			         
+		  }
 		
 		
-		
-	}).fail()
+	}).fail(function(error) {
+		console.log(error);
 	
+		
+	});
 }

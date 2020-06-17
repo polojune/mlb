@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.cos.mlb.action.Action;
 import com.cos.mlb.action.HomeAction;
+import com.cos.mlb.action.PlayerInfoProcAction;
 import com.cos.mlb.action.PlayerProcAction;
 
 @WebServlet("/team")
@@ -45,12 +46,13 @@ public class TeamController extends HttpServlet {
 	public Action router(String cmd) {
 		if (cmd.equals("home")) {
 			return new HomeAction();
-		}else if (cmd.equals("playerProc")) {
+		} else if (cmd.equals("playerProc")) {
 			return new PlayerProcAction();
+		} else if (cmd.equals("playerInfoProc")) {
+			return new PlayerInfoProcAction();
 		}
 
 		return null;
 
-		
 	}
 }
